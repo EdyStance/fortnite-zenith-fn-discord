@@ -2,685 +2,707 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Fortnite Zenith | Discord</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background:
-                radial-gradient(circle at 20% 20%, #4b21a8 0%, transparent 35%),
-                radial-gradient(circle at 80% 80%, #0ea5e9 0%, transparent 35%),
-                #080817;
-            color: white;
-            min-height: 100vh;
-            overflow-x: hidden;
-
-            /* Prevent normal text selection */
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-        }
-
-        a {
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
-        /* =========================
-           NAVBAR
-        ========================= */
-
-        nav {
-            width: 100%;
-            padding: 22px 7%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 10;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 900;
-            letter-spacing: 2px;
-        }
-
-        .logo span {
-            color: #8b5cf6;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .nav-button {
-            text-decoration: none;
-            color: white;
-            border: 1px solid rgba(255,255,255,0.25);
-            padding: 10px 20px;
-            border-radius: 10px;
-            transition: 0.3s;
-            font-weight: 700;
-        }
-
-        .nav-button:hover {
-            background: white;
-            color: #111;
-            transform: translateY(-2px);
-        }
-
-        .rules-button {
-            background: rgba(139, 92, 246, 0.15);
-            border-color: rgba(139, 92, 246, 0.5);
-        }
-
-        .rules-button:hover {
-            background: #8b5cf6;
-            color: white;
-        }
-
-        /* =========================
-           HERO
-        ========================= */
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 120px 20px 60px;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 900px;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 8px 16px;
-            border-radius: 30px;
-            background: rgba(139, 92, 246, 0.18);
-            border: 1px solid rgba(139, 92, 246, 0.5);
-            color: #c4b5fd;
-            margin-bottom: 25px;
-            font-size: 14px;
-        }
-
-        h1 {
-            font-size: clamp(55px, 10vw, 110px);
-            font-weight: 1000;
-            line-height: 0.9;
-            text-transform: uppercase;
-            letter-spacing: -5px;
-            text-shadow:
-                0 0 20px rgba(139,92,246,0.5),
-                0 10px 40px rgba(0,0,0,0.6);
-        }
-
-        h1 span {
-            color: #8b5cf6;
-        }
-
-        .subtitle {
-            margin: 30px auto;
-            max-width: 650px;
-            color: #c4c4d4;
-            font-size: 18px;
-            line-height: 1.7;
-        }
-
-        /* =========================
-           BUTTON
-        ========================= */
-
-        .join-button {
-            display: inline-block;
-            text-decoration: none;
-            color: white;
-            background: linear-gradient(135deg, #5865f2, #7c3aed);
-            padding: 17px 38px;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 800;
-            box-shadow: 0 10px 35px rgba(88,101,242,0.35);
-            transition: 0.3s;
-        }
-
-        .join-button:hover {
-            transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 15px 45px rgba(88,101,242,0.55);
-        }
-
-        /* =========================
-           FEATURES
-        ========================= */
-
-        .features {
-            padding: 90px 7%;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .card {
-            padding: 35px 25px;
-            text-align: center;
-            border-radius: 20px;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(139,92,246,0.5);
-            background: rgba(255,255,255,0.09);
-        }
-
-        .icon {
-            font-size: 40px;
-            margin-bottom: 18px;
-        }
-
-        .card h2 {
-            margin-bottom: 12px;
-        }
-
-        .card p {
-            color: #aaaabd;
-            line-height: 1.6;
-        }
-
-        /* =========================
-           DISCORD SECTION
-        ========================= */
-
-        .discord {
-            text-align: center;
-            padding: 100px 20px;
-        }
-
-        .discord h2 {
-            font-size: 42px;
-            margin-bottom: 20px;
-        }
-
-        .discord p {
-            color: #aaaabd;
-            margin-bottom: 30px;
-        }
-
-        /* =========================
-           RULES PAGE
-        ========================= */
-
-        .rules-page {
-            display: none;
-            min-height: 100vh;
-            padding: 120px 20px 70px;
-            background:
-                radial-gradient(circle at 10% 10%, #4b21a8 0%, transparent 30%),
-                radial-gradient(circle at 90% 80%, #0ea5e9 0%, transparent 30%),
-                #080817;
-        }
-
-        .rules-page.active {
-            display: block;
-        }
-
-        .home-page.hidden {
-            display: none;
-        }
-
-        .rules-container {
-            max-width: 1000px;
-            margin: auto;
-        }
-
-        .rules-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .rules-header .badge {
-            margin-bottom: 20px;
-        }
-
-        .rules-header h2 {
-            font-size: clamp(45px, 8vw, 80px);
-            text-transform: uppercase;
-            letter-spacing: -3px;
-            margin-bottom: 20px;
-        }
-
-        .rules-header h2 span {
-            color: #8b5cf6;
-        }
-
-        .rules-header p {
-            color: #aaaabd;
-            font-size: 17px;
-            line-height: 1.7;
-            max-width: 700px;
-            margin: auto;
-        }
-
-        .rules-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .rule-card {
-            padding: 30px;
-            border-radius: 18px;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: 0.3s;
-        }
-
-        .rule-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(139,92,246,0.5);
-        }
-
-        .rule-number {
-            display: inline-flex;
-            width: 38px;
-            height: 38px;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: #8b5cf6;
-            font-weight: 900;
-            margin-bottom: 18px;
-        }
-
-        .rule-card h3 {
-            font-size: 22px;
-            margin-bottom: 12px;
-        }
-
-        .rule-card p {
-            color: #aaaabd;
-            line-height: 1.7;
-        }
-
-        .warning {
-            border-color: rgba(239, 68, 68, 0.4);
-            background: rgba(239, 68, 68, 0.07);
-        }
-
-        .warning .rule-number {
-            background: #ef4444;
-        }
-
-        .back-button {
-            display: block;
-            width: fit-content;
-            margin: 50px auto 0;
-            padding: 13px 25px;
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 10px;
-            color: white;
-            background: rgba(255,255,255,0.06);
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 700;
-            transition: 0.3s;
-        }
-
-        .back-button:hover {
-            background: white;
-            color: #111;
-        }
-
-        /* =========================
-           FOOTER
-        ========================= */
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            color: #77778c;
-        }
-
-        /* =========================
-           MOBILE
-        ========================= */
-
-        @media (max-width: 750px) {
-
-            .features {
-                grid-template-columns: 1fr;
-            }
-
-            .rules-grid {
-                grid-template-columns: 1fr;
-            }
-
-            nav {
-                padding: 20px;
-            }
-
-            .nav-links {
-                gap: 6px;
-            }
-
-            .nav-button {
-                padding: 8px 12px;
-                font-size: 13px;
-            }
-
-            h1 {
-                letter-spacing: -3px;
-            }
-
-            .subtitle {
-                font-size: 16px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fortnite Zenith | Discord</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background:
+        radial-gradient(circle at 20% 20%, #4b21a8, transparent 35%),
+        radial-gradient(circle at 80% 80%, #0ea5e9, transparent 35%),
+        #080817;
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* NAVBAR */
+
+nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 22px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: #8b5cf6;
+}
+
+.nav-links {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-button {
+    display: inline-block;
+    padding: 11px 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.25);
+    color: white;
+    background: rgba(255,255,255,0.05);
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.nav-button:hover {
+    background: white;
+    color: #111;
+}
+
+.rules-button {
+    background: #8b5cf6;
+    border: none;
+}
+
+/* HOME */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 20px 60px;
+}
+
+.hero-content {
+    max-width: 900px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 9px 17px;
+    border-radius: 30px;
+    background: rgba(139,92,246,0.18);
+    border: 1px solid rgba(139,92,246,0.5);
+    color: #c4b5fd;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-size: clamp(55px, 10vw, 110px);
+    font-weight: 1000;
+    line-height: 0.9;
+    text-transform: uppercase;
+    letter-spacing: -5px;
+}
+
+h1 span {
+    color: #8b5cf6;
+}
+
+.subtitle {
+    margin: 30px auto;
+    max-width: 650px;
+    color: #c4c4d4;
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.join-button {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(135deg, #5865f2, #7c3aed);
+    padding: 17px 38px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 800;
+    transition: 0.3s;
+}
+
+.join-button:hover {
+    transform: translateY(-5px) scale(1.03);
+}
+
+.features {
+    padding: 90px 7%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.card {
+    padding: 35px 25px;
+    text-align: center;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.icon {
+    font-size: 40px;
+    margin-bottom: 18px;
+}
+
+.card h2 {
+    margin-bottom: 12px;
+}
+
+.card p {
+    color: #aaaabd;
+    line-height: 1.6;
+}
+
+.discord {
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.discord h2 {
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.discord p {
+    color: #aaaabd;
+    margin-bottom: 30px;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    color: #77778c;
+}
+
+/* RULES */
+
+#rulesPage {
+    display: none;
+    min-height: 100vh;
+    padding: 120px 20px 70px;
+    background:
+        radial-gradient(circle at 10% 10%, #4b21a8, transparent 30%),
+        radial-gradient(circle at 90% 80%, #0ea5e9, transparent 30%),
+        #080817;
+}
+
+#rulesPage.show {
+    display: block;
+}
+
+#homePage.hide {
+    display: none;
+}
+
+.rules-container {
+    max-width: 1050px;
+    margin: auto;
+}
+
+.rules-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.rules-header h2 {
+    font-size: clamp(45px, 8vw, 80px);
+    margin-bottom: 20px;
+}
+
+.rules-header h2 span {
+    color: #8b5cf6;
+}
+
+.rules-header p {
+    color: #aaaabd;
+    line-height: 1.7;
+    max-width: 700px;
+    margin: auto;
+}
+
+.rules-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.rule-card {
+    padding: 30px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.rule-number {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #8b5cf6;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+.rule-card h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.rule-card p {
+    color: #aaaabd;
+    line-height: 1.7;
+}
+
+.warning {
+    border-color: rgba(239,68,68,0.4);
+}
+
+.warning .rule-number {
+    background: #ef4444;
+}
+
+.back-button {
+    display: block;
+    margin: 50px auto 0;
+    padding: 14px 25px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.06);
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.back-button:hover {
+    background: white;
+    color: black;
+}
+
+@media (max-width: 750px) {
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    .rules-grid {
+        grid-template-columns: 1fr;
+    }
+
+    nav {
+        padding: 20px;
+    }
+
+    .nav-button {
+        padding: 9px 12px;
+        font-size: 13px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- =========================
-         HOME PAGE
-    ========================== -->
+<!-- HOME PAGE -->
 
-    <div class="home-page" id="homePage">
+<div id="homePage">
 
-        <nav>
-            <div class="logo">
-                ZENITH<span>.</span>
-            </div>
+<nav>
 
-            <div class="nav-links">
+    <div class="logo">
+        ZENITH<span>.</span>
+    </div>
 
-                <button class="nav-button rules-button" onclick="openRules()">
-                    Rules
-                </button>
+    <div class="nav-links">
 
-                <a class="nav-button"
-                   href="https://discord.gg/z7wX5uJD"
-                   target="_blank">
-                    Discord
-                </a>
+        <button
+            type="button"
+            class="nav-button rules-button"
+            onclick="showRules()">
+            📜 RULES
+        </button>
 
-            </div>
-        </nav>
-
-        <section class="hero">
-
-            <div class="hero-content">
-
-                <div class="badge">
-                    🎮 WELCOME TO ZENITH
-                </div>
-
-                <h1>
-                    FORTNITE<br>
-                    <span>ZENITH</span>
-                </h1>
-
-                <p class="subtitle">
-                    Welcome to Fortnite Zenith — a community for Fortnite
-                    players, gamers and friends. Join our Discord and become
-                    part of the community.
-                </p>
-
-                <a class="join-button"
-                   href="https://discord.gg/z7wX5uJD"
-                   target="_blank">
-                    🚀 JOIN DISCORD
-                </a>
-
-            </div>
-
-        </section>
-
-        <section class="features">
-
-            <div class="card">
-                <div class="icon">🎮</div>
-                <h2>Gaming</h2>
-                <p>
-                    Play Fortnite, meet new players and have fun together.
-                </p>
-            </div>
-
-            <div class="card">
-                <div class="icon">💬</div>
-                <h2>Community</h2>
-                <p>
-                    Chat with other members and make new friends.
-                </p>
-            </div>
-
-            <div class="card">
-                <div class="icon">⚡</div>
-                <h2>Zenith</h2>
-                <p>
-                    Become part of the Zenith community and don't miss out.
-                </p>
-            </div>
-
-        </section>
-
-        <section class="discord">
-
-            <h2>Ready to join?</h2>
-
-            <p>
-                Click the button below and join the Zenith Discord server.
-            </p>
-
-            <a class="join-button"
-               href="https://discord.gg/z7wX5uJD"
-               target="_blank">
-                JOIN ZENITH DISCORD
-            </a>
-
-        </section>
-
-        <footer>
-            © 2026 Fortnite Zenith. All rights reserved.
-        </footer>
+        <a
+            class="nav-button"
+            href="https://discord.gg/z7wX5uJD"
+            target="_blank">
+            💬 DISCORD
+        </a>
 
     </div>
 
-
-    <!-- =========================
-         RULES PAGE
-    ========================== -->
-
-    <div class="rules-page" id="rulesPage">
-
-        <div class="rules-container">
-
-            <div class="rules-header">
-
-                <div class="badge">
-                    📜 ZENITH COMMUNITY RULES
-                </div>
-
-                <h2>
-                    SERVER <span>RULES</span>
-                </h2>
-
-                <p>
-                    Please read all of the rules before participating in the
-                    Zenith community. By joining the server, you agree to
-                    follow these rules. Staff members may take action when
-                    necessary to keep the community safe and enjoyable.
-                </p>
-
-            </div>
+</nav>
 
 
-            <div class="rules-grid">
+<section class="hero">
 
-                <div class="rule-card">
-                    <div class="rule-number">01</div>
-                    <h3>Respect Everyone</h3>
-                    <p>
-                        Treat every member with respect. Harassment,
-                        bullying, discrimination, personal attacks and
-                        intentionally causing problems are not allowed.
-                        Everyone should be able to enjoy the community.
-                    </p>
-                </div>
+<div class="hero-content">
 
+    <div class="badge">
+        🎮 WELCOME TO ZENITH
+    </div>
 
-                <div class="rule-card warning">
-                    <div class="rule-number">02</div>
-                    <h3>No Swearing</h3>
-                    <p>
-                        Keep the chat clean and appropriate. Excessive
-                        swearing, insults and offensive language are not
-                        allowed. Example: repeatedly using offensive words
-                        toward another member. If you swear or insult other
-                        members, you may receive a warning, mute or ban
-                        depending on the situation.
-                    </p>
-                </div>
+    <h1>
+        FORTNITE<br>
+        <span>ZENITH</span>
+    </h1>
 
+    <p class="subtitle">
+        Welcome to Fortnite Zenith — a community for Fortnite
+        players, gamers and friends. Join our Discord and become
+        part of the community.
+    </p>
 
-                <div class="rule-card">
-                    <div class="rule-number">03</div>
-                    <h3>Anti-Cheat</h3>
-                    <p>
-                        Cheats, hacks, exploits, unauthorized software,
-                        unfair advantages and attempts to bypass game
-                        security are strictly prohibited. Using cheats can
-                        result in an immediate ban from the community.
-                    </p>
-                </div>
+    <a
+        class="join-button"
+        href="https://discord.gg/z7wX5uJD"
+        target="_blank">
+        🚀 JOIN DISCORD
+    </a>
+
+</div>
+
+</section>
 
 
-                <div class="rule-card">
-                    <div class="rule-number">04</div>
-                    <h3>No Spam</h3>
-                    <p>
-                        Do not flood channels with repeated messages,
-                        excessive emojis, repeated mentions or unnecessary
-                        content. Keep conversations readable and useful for
-                        everyone.
-                    </p>
-                </div>
+<section class="features">
+
+<div class="card">
+    <div class="icon">🎮</div>
+    <h2>Gaming</h2>
+    <p>
+        Play Fortnite, meet new players and have fun together.
+    </p>
+</div>
+
+<div class="card">
+    <div class="icon">💬</div>
+    <h2>Community</h2>
+    <p>
+        Chat with other members and make new friends.
+    </p>
+</div>
+
+<div class="card">
+    <div class="icon">⚡</div>
+    <h2>Zenith</h2>
+    <p>
+        Become part of the Zenith community and don't miss out.
+    </p>
+</div>
+
+</section>
 
 
-                <div class="rule-card">
-                    <div class="rule-number">05</div>
-                    <h3>No Advertising</h3>
-                    <p>
-                        Advertising other Discord servers, websites,
-                        communities, products or services without permission
-                        is not allowed. Ask staff before posting promotional
-                        content.
-                    </p>
-                </div>
+<section class="discord">
+
+<h2>Ready to join?</h2>
+
+<p>
+    Click the button below and join the Zenith Discord server.
+</p>
+
+<a
+    class="join-button"
+    href="https://discord.gg/z7wX5uJD"
+    target="_blank">
+    JOIN ZENITH DISCORD
+</a>
+
+</section>
 
 
-                <div class="rule-card">
-                    <div class="rule-number">06</div>
-                    <h3>No NSFW Content</h3>
-                    <p>
-                        Keep the community safe and appropriate. Sexual,
-                        explicit or otherwise inappropriate content is not
-                        allowed anywhere in the server.
-                    </p>
-                </div>
+<footer>
+    © 2026 Fortnite Zenith. All rights reserved.
+</footer>
+
+</div>
 
 
-                <div class="rule-card">
-                    <div class="rule-number">07</div>
-                    <h3>No Toxic Behavior</h3>
-                    <p>
-                        Do not intentionally provoke arguments, start
-                        unnecessary drama or repeatedly target other members.
-                        Competitive gaming is fine, but keep it friendly.
-                    </p>
-                </div>
+<!-- RULES PAGE -->
+
+<div id="rulesPage">
+
+<div class="rules-container">
+
+<div class="rules-header">
+
+    <div class="badge">
+        📜 ZENITH COMMUNITY
+    </div>
+
+    <h2>
+        SERVER <span>RULES</span>
+    </h2>
+
+    <p>
+        Please read all rules before participating in the Zenith
+        community. By joining the server, you agree to follow these
+        rules. Staff may take action when necessary.
+    </p>
+
+</div>
 
 
-                <div class="rule-card">
-                    <div class="rule-number">08</div>
-                    <h3>No Scamming</h3>
-                    <p>
-                        Scamming, phishing, stealing accounts, impersonating
-                        staff or attempting to trick members is strictly
-                        prohibited. Any suspicious activity should be reported
-                        to the staff team.
-                    </p>
-                </div>
+<div class="rules-grid">
 
 
-                <div class="rule-card">
-                    <div class="rule-number">09</div>
-                    <h3>Follow Staff Instructions</h3>
-                    <p>
-                        Staff members are responsible for maintaining order.
-                        If a moderator asks you to stop an activity or move
-                        a conversation, follow the instruction. If you believe
-                        a decision was unfair, contact staff privately.
-                    </p>
-                </div>
+<div class="rule-card">
+
+    <div class="rule-number">01</div>
+
+    <h3>Respect Everyone</h3>
+
+    <p>
+        Treat every member with respect. Harassment, bullying,
+        discrimination, personal attacks and intentionally causing
+        problems are not allowed.
+    </p>
+
+</div>
 
 
-                <div class="rule-card">
-                    <div class="rule-number">10</div>
-                    <h3>No Impersonation</h3>
-                    <p>
-                        Do not pretend to be another member, moderator,
-                        administrator, creator or official representative.
-                        Impersonation can result in an immediate moderation
-                        action.
-                    </p>
-                </div>
+<div class="rule-card warning">
+
+    <div class="rule-number">02</div>
+
+    <h3>No Swearing</h3>
+
+    <p>
+        Keep the chat clean and appropriate. Offensive language,
+        insults and excessive swearing are not allowed.
+        If you insult or swear at members, you may receive a
+        warning, mute or ban depending on the situation.
+    </p>
+
+</div>
 
 
-                <div class="rule-card">
-                    <div class="rule-number">11</div>
-                    <h3>Keep Channels On Topic</h3>
-                    <p>
-                        Use channels for their intended purpose. Read channel
-                        descriptions and keep conversations relevant so that
-                        everyone can easily find the information they need.
-                    </p>
-                </div>
+<div class="rule-card">
+
+    <div class="rule-number">03</div>
+
+    <h3>Anti-Cheat</h3>
+
+    <p>
+        Cheats, hacks, unauthorized software, exploits and other
+        unfair advantages are strictly prohibited. Using cheats
+        can result in an immediate ban.
+    </p>
+
+</div>
 
 
-                <div class="rule-card warning">
-                    <div class="rule-number">12</div>
-                    <h3>Breaking Rules Has Consequences</h3>
-                    <p>
-                        Depending on the severity and frequency of a
-                        violation, staff may issue a warning, mute, kick or
-                        ban. Serious viol
+<div class="rule-card">
+
+    <div class="rule-number">04</div>
+
+    <h3>No Spam</h3>
+
+    <p>
+        Do not flood channels with repeated messages, excessive
+        emojis, repeated mentions or unnecessary content.
+    </p>
+
+</div>
+
+
+<div class="rule-card">
+
+    <div class="rule-number">05</div>
+
+    <h3>No Advertising</h3>
+
+    <p>
+        Advertising other Discord servers, websites, communities
+        or services without permission is not allowed.
+    </p>
+
+</div>
+
+
+<div class="rule-card">
+
+    <div class="rule-number">06</div>
+
+    <h3>No NSFW Content</h3>
+
+    <p>
+        Keep the community safe and appropriate. Explicit or
+        inappropriate content is not allowed anywhere in the server.
+    </p>
+
+</div>
+
+
+<div class="rule-card">
+
+    <div class="rule-number">07</div>
+
+    <h3>No Toxic Behavior</h3>
+
+    <p>
+        Do not intentionally provoke arguments, create drama or
+        repeatedly target other members. Keep competition friendly.
+    </p>
+
+</div>
+
+
+<div class="rule-card">
+
+    <div class="rule-number">08</div>
+
+    <h3>No Scamming</h3>
+
+    <p>
+        Scamming, phishing, stealing accounts, impersonating staff
+        or attempting to trick members is strictly prohibited.
+    </p>
+
+</div>
+
+
+<div class="rule-card">
+
+    <div class="rule-number">09</div>
+
+    <h3>Follow Staff Instructions</h3>
+
+    <p>
+        Staff members help maintain order. Follow reasonable
+        moderator instructions and contact staff privately if
+        you believe a decision was unfair.
+    </p>
+
+</div>
+
+
+<div class="rule-card">
+
+    <div class="rule-number">10</div>
+
+    <h3>No Impersonation</h3>
+
+    <p>
+        Do not pretend to be another member, moderator,
+        administrator or official representative.
+    </p>
+
+</div>
+
+
+<div class="rule-card">
+
+    <div class="rule-number">11</div>
+
+    <h3>Keep Channels On Topic</h3>
+
+    <p>
+        Use channels for their intended purpose. Keep conversations
+        relevant so information remains easy to find.
+    </p>
+
+</div>
+
+
+<div class="rule-card warning">
+
+    <div class="rule-number">12</div>
+
+    <h3>Breaking Rules</h3>
+
+    <p>
+        Depending on the severity and frequency of a violation,
+        staff may issue a warning, mute, kick or ban.
+        Serious violations may result in an immediate ban.
+    </p>
+
+</div>
+
+
+</div>
+
+
+<button
+    type="button"
+    class="back-button"
+    onclick="showHome()">
+    ← BACK TO HOME
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* OPEN RULES */
+
+function showRules() {
+
+    document.getElementById("homePage").classList.add("hide");
+
+    document.getElementById("rulesPage").classList.add("show");
+
+    window.scrollTo(0, 0);
+}
+
+
+/* CLOSE RULES */
+
+function showHome() {
+
+    document.getElementById("rulesPage").classList.remove("show");
+
+    document.getElementById("homePage").classList.remove("hide");
+
+    window.scrollTo(0, 0);
+}
+
+
+/* DISABLE RIGHT CLICK */
+
+document.addEventListener("contextmenu", function(event) {
+    event.preventDefault();
+});
+
+
+/* DISABLE COPY */
+
+document.addEventListener("copy", function(event) {
+    event.preventDefault();
+});
+
+
+/* DISABLE CUT */
+
+document.addEventListener("cut", function(event) {
+    event.preventDefault();
+});
+
+</script>
+
+</body>
+</html>
 ```
