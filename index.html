@@ -1,0 +1,304 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortnite Zenith | Discord</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 20% 20%, #4b21a8 0%, transparent 35%),
+                radial-gradient(circle at 80% 80%, #0ea5e9 0%, transparent 35%),
+                #080817;
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        nav {
+            width: 100%;
+            padding: 22px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #8b5cf6;
+        }
+
+        .nav-button {
+            text-decoration: none;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 10px 20px;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .nav-button:hover {
+            background: white;
+            color: #111;
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 60px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 30px;
+            background: rgba(139, 92, 246, 0.18);
+            border: 1px solid rgba(139, 92, 246, 0.5);
+            color: #c4b5fd;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        h1 {
+            font-size: clamp(55px, 10vw, 110px);
+            font-weight: 1000;
+            line-height: 0.9;
+            text-transform: uppercase;
+            letter-spacing: -5px;
+            text-shadow:
+                0 0 20px rgba(139,92,246,0.5),
+                0 10px 40px rgba(0,0,0,0.6);
+        }
+
+        h1 span {
+            color: #8b5cf6;
+        }
+
+        .subtitle {
+            margin: 30px auto;
+            max-width: 650px;
+            color: #c4c4d4;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .join-button {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            background: linear-gradient(135deg, #5865f2, #7c3aed);
+            padding: 17px 38px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 800;
+            box-shadow: 0 10px 35px rgba(88,101,242,0.35);
+            transition: 0.3s;
+        }
+
+        .join-button:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 15px 45px rgba(88,101,242,0.55);
+        }
+
+        .features {
+            padding: 90px 7%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .card {
+            padding: 35px 25px;
+            text-align: center;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(139,92,246,0.5);
+            background: rgba(255,255,255,0.09);
+        }
+
+        .icon {
+            font-size: 40px;
+            margin-bottom: 18px;
+        }
+
+        .card h2 {
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #aaaabd;
+            line-height: 1.6;
+        }
+
+        .discord {
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .discord h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .discord p {
+            color: #aaaabd;
+            margin-bottom: 30px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            color: #77778c;
+        }
+
+        @media (max-width: 750px) {
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                padding: 20px;
+            }
+
+            h1 {
+                letter-spacing: -3px;
+            }
+
+            .subtitle {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">
+            ZENITH<span>.</span>
+        </div>
+
+        <a class="nav-button"
+           href="https://discord.gg/z7wX5uJD"
+           target="_blank">
+            Discord
+        </a>
+    </nav>
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                🎮 WELCOME TO ZENITH
+            </div>
+
+            <h1>
+                FORTNITE<br>
+                <span>ZENITH</span>
+            </h1>
+
+            <p class="subtitle">
+                Welcome to Fortnite Zenith — a community for Fortnite
+                players, gamers and friends. Join our Discord and become
+                part of the community.
+            </p>
+
+            <a class="join-button"
+               href="https://discord.gg/z7wX5uJD"
+               target="_blank">
+                🚀 JOIN DISCORD
+            </a>
+
+        </div>
+
+    </section>
+
+    <section class="features">
+
+        <div class="card">
+            <div class="icon">🎮</div>
+            <h2>Gaming</h2>
+            <p>
+                Play Fortnite, meet new players and have fun together.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">💬</div>
+            <h2>Community</h2>
+            <p>
+                Chat with other members and make new friends.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">⚡</div>
+            <h2>Zenith</h2>
+            <p>
+                Become part of the Zenith community and don't miss out.
+            </p>
+        </div>
+
+    </section>
+
+    <section class="discord">
+
+        <h2>Ready to join?</h2>
+
+        <p>
+            Click the button below and join the Zenith Discord server.
+        </p>
+
+        <a class="join-button"
+           href="https://discord.gg/z7wX5uJD"
+           target="_blank">
+            JOIN ZENITH DISCORD
+        </a>
+
+    </section>
+
+    <footer>
+        © 2026 Fortnite Zenith. All rights reserved.
+    </footer>
+
+</body>
+</html>
+```
