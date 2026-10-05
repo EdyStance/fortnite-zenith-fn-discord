@@ -1,894 +1,1161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>ZENITH | Fortnite Community</title>
-
-    <meta name="description" content="Welcome to Zenith — a modern Fortnite gaming community.">
-    <meta name="theme-color" content="#7c3cff">
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background:
-                radial-gradient(circle at 20% 20%, rgba(124, 60, 255, 0.18), transparent 30%),
-                radial-gradient(circle at 80% 10%, rgba(0, 170, 255, 0.15), transparent 30%),
-                linear-gradient(135deg, #050510, #0b0920 45%, #050510);
-            color: white;
-            min-height: 100vh;
-            overflow-x: hidden;
-            user-select: none;
-        }
-
-        /* BACKGROUND EFFECTS */
-
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-            background-size: 50px 50px;
-            pointer-events: none;
-            z-index: -2;
-        }
-
-        .glow {
-            position: fixed;
-            width: 400px;
-            height: 400px;
-            border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.25;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .glow.one {
-            background: #7c3cff;
-            top: -150px;
-            left: -100px;
-        }
-
-        .glow.two {
-            background: #008cff;
-            right: -150px;
-            top: 300px;
-        }
-
-        /* NAVBAR */
-
-        nav {
-            width: 100%;
-            padding: 22px 6%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            background: rgba(5, 5, 16, 0.72);
-            backdrop-filter: blur(18px);
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .logo {
-            font-size: 25px;
-            font-weight: 900;
-            letter-spacing: 4px;
-            color: white;
-            text-shadow:
-                0 0 10px rgba(124,60,255,0.9),
-                0 0 25px rgba(0,170,255,0.5);
-        }
-
-        .logo span {
-            color: #8b5cf6;
-        }
-
-        .nav-buttons {
-            display: flex;
-            gap: 12px;
-        }
-
-        .nav-button {
-            text-decoration: none;
-            color: white;
-            border: 1px solid rgba(255,255,255,0.15);
-            background: rgba(255,255,255,0.05);
-            padding: 11px 18px;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 14px;
-            transition: 0.3s;
-        }
-
-        .nav-button:hover {
-            transform: translateY(-3px);
-            border-color: #8b5cf6;
-            box-shadow: 0 0 20px rgba(124,60,255,0.35);
-        }
-
-        .discord-button {
-            background: linear-gradient(135deg, #5865f2, #7c3cff);
-            border: none;
-            box-shadow: 0 0 20px rgba(88,101,242,0.3);
-        }
-
-        .discord-button:hover {
-            box-shadow: 0 0 30px rgba(124,60,255,0.65);
-        }
-
-        /* HERO */
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 130px 20px 80px;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 1000px;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 9px 16px;
-            border: 1px solid rgba(139,92,246,0.45);
-            border-radius: 50px;
-            background: rgba(124,60,255,0.1);
-            color: #c4b5fd;
-            font-size: 13px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            margin-bottom: 25px;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .hero h1 {
-            font-size: clamp(65px, 12vw, 150px);
-            line-height: 0.85;
-            font-weight: 1000;
-            letter-spacing: -5px;
-            background: linear-gradient(
-                90deg,
-                #ffffff,
-                #bca7ff,
-                #7c3cff,
-                #00aaff
-            );
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 50px rgba(124,60,255,0.25);
-        }
-
-        .hero h2 {
-            margin-top: 25px;
-            font-size: 19px;
-            color: #a9a5b8;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-        }
-
-        .hero p {
-            max-width: 650px;
-            margin: 25px auto;
-            color: #858294;
-            line-height: 1.7;
-            font-size: 16px;
-        }
-
-        .hero-buttons {
-            margin-top: 35px;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .main-button {
-            display: inline-block;
-            padding: 16px 28px;
-            border-radius: 12px;
-            text-decoration: none;
-            color: white;
-            font-weight: 900;
-            letter-spacing: 0.5px;
-            transition: 0.3s;
-        }
-
-        .join-button {
-            background: linear-gradient(135deg, #7c3cff, #00aaff);
-            box-shadow: 0 0 30px rgba(124,60,255,0.4);
-        }
-
-        .join-button:hover {
-            transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 0 45px rgba(124,60,255,0.7);
-        }
-
-        .explore-button {
-            border: 1px solid rgba(255,255,255,0.15);
-            background: rgba(255,255,255,0.04);
-        }
-
-        .explore-button:hover {
-            background: rgba(255,255,255,0.09);
-            transform: translateY(-5px);
-        }
-
-        /* STATS */
-
-        .stats {
-            max-width: 1000px;
-            margin: -50px auto 80px;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .stat {
-            padding: 28px;
-            text-align: center;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 18px;
-            backdrop-filter: blur(12px);
-            transition: 0.3s;
-        }
-
-        .stat:hover {
-            transform: translateY(-5px);
-            border-color: rgba(124,60,255,0.5);
-            box-shadow: 0 0 25px rgba(124,60,255,0.15);
-        }
-
-        .stat h3 {
-            font-size: 32px;
-            color: #a78bfa;
-        }
-
-        .stat p {
-            color: #777487;
-            margin-top: 6px;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* SECTIONS */
-
-        section {
-            max-width: 1150px;
-            margin: 0 auto;
-            padding: 90px 25px;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title span {
-            color: #8b5cf6;
-            font-size: 13px;
-            font-weight: bold;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        .section-title h2 {
-            font-size: 42px;
-            margin-top: 10px;
-        }
-
-        .section-title p {
-            color: #777487;
-            margin-top: 12px;
-        }
-
-        /* FEATURE CARDS */
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-
-        .card {
-            padding: 30px;
-            border-radius: 20px;
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255,255,255,0.07),
-                    rgba(255,255,255,0.025)
-                );
-            border: 1px solid rgba(255,255,255,0.08);
-            transition: 0.35s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: "";
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            background: #7c3cff;
-            filter: blur(70px);
-            opacity: 0;
-            top: -50px;
-            right: -50px;
-            transition: 0.35s;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(139,92,246,0.45);
-            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
-        }
-
-        .card:hover::before {
-            opacity: 0.35;
-        }
-
-        .icon {
-            font-size: 35px;
-            margin-bottom: 20px;
-        }
-
-        .card h3 {
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-
-        .card p {
-            color: #777487;
-            line-height: 1.6;
-            font-size: 14px;
-        }
-
-        /* EVENTS */
-
-        .events {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 18px;
-        }
-
-        .event {
-            padding: 28px;
-            border-radius: 18px;
-            background: rgba(255,255,255,0.035);
-            border: 1px solid rgba(255,255,255,0.08);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-            transition: 0.3s;
-        }
-
-        .event:hover {
-            border-color: #7c3cff;
-            transform: translateX(5px);
-        }
-
-        .event-label {
-            color: #8b5cf6;
-            font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 2px;
-        }
-
-        .event h3 {
-            margin-top: 7px;
-        }
-
-        .event p {
-            margin-top: 6px;
-            color: #777487;
-            font-size: 13px;
-        }
-
-        .event-icon {
-            font-size: 35px;
-        }
-
-        /* DISCORD CTA */
-
-        .discord-section {
-            text-align: center;
-        }
-
-        .discord-box {
-            padding: 65px 30px;
-            border-radius: 28px;
-            background:
-                radial-gradient(circle at 50% 0%, rgba(124,60,255,0.25), transparent 55%),
-                rgba(255,255,255,0.035);
-            border: 1px solid rgba(124,60,255,0.3);
-            box-shadow: 0 0 70px rgba(124,60,255,0.08);
-        }
-
-        .discord-box h2 {
-            font-size: 45px;
-            margin-bottom: 15px;
-        }
-
-        .discord-box p {
-            color: #858294;
-            max-width: 600px;
-            margin: 0 auto 30px;
-            line-height: 1.7;
-        }
-
-        /* FOOTER */
-
-        footer {
-            border-top: 1px solid rgba(255,255,255,0.08);
-            padding: 35px 20px;
-            text-align: center;
-            color: #625e70;
-            font-size: 13px;
-        }
-
-        footer strong {
-            color: #a78bfa;
-        }
-
-        /* ANIMATION */
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-6px);
-            }
-        }
-
-        /* MOBILE */
-
-        @media (max-width: 800px) {
-
-            nav {
-                padding: 16px 20px;
-            }
-
-            .logo {
-                font-size: 20px;
-            }
-
-            .nav-button {
-                padding: 9px 11px;
-                font-size: 12px;
-            }
-
-            .stats,
-            .cards,
-            .events {
-                grid-template-columns: 1fr;
-            }
-
-            .stats {
-                margin-top: 0;
-            }
-
-            .hero h1 {
-                letter-spacing: -3px;
-            }
-
-            .hero h2 {
-                font-size: 14px;
-                letter-spacing: 3px;
-            }
-
-            .section-title h2 {
-                font-size: 32px;
-            }
-
-            .discord-box h2 {
-                font-size: 34px;
-            }
-        }
-
-        /* COPY PROTECTION */
-
-        ::selection {
-            background: transparent;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ZENITH | Gaming Community</title>
+
+<meta name="description" content="Welcome to Zenith — a modern gaming community.">
+<meta name="theme-color" content="#7c3cff">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 15% 15%, rgba(124,60,255,.20), transparent 30%),
+        radial-gradient(circle at 85% 25%, rgba(0,170,255,.14), transparent 30%),
+        linear-gradient(135deg,#050510,#0a0820,#050510);
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+    user-select: none;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: -2;
+}
+
+.orb {
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: .22;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.orb.one {
+    background: #7c3cff;
+    top: -120px;
+    left: -120px;
+}
+
+.orb.two {
+    background: #008cff;
+    right: -150px;
+    top: 450px;
+}
+
+/* NAVBAR */
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 18px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+
+    background: rgba(5,5,16,.72);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-shadow: 0 0 25px rgba(124,60,255,.7);
+}
+
+.logo span {
+    color: #8b5cf6;
+}
+
+.nav-links {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: bold;
+    transition: .3s;
+}
+
+.nav-links a:hover {
+    background: rgba(255,255,255,.07);
+    color: #a78bfa;
+}
+
+.discord-nav {
+    background: linear-gradient(135deg,#5865f2,#7c3cff);
+}
+
+/* HERO */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 130px 20px 80px;
+}
+
+.hero-content {
+    max-width: 950px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 9px 16px;
+    border-radius: 50px;
+    border: 1px solid rgba(139,92,246,.45);
+    background: rgba(124,60,255,.1);
+    color: #c4b5fd;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.hero h1 {
+    font-size: clamp(70px,13vw,155px);
+    line-height: .85;
+    font-weight: 1000;
+    letter-spacing: -6px;
+
+    background: linear-gradient(
+        90deg,
+        white,
+        #c4b5fd,
+        #7c3cff,
+        #00aaff
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero h2 {
+    margin-top: 25px;
+    color: #a29daf;
+    font-size: 18px;
+    letter-spacing: 7px;
+}
+
+.hero p {
+    max-width: 650px;
+    margin: 25px auto;
+    color: #817c90;
+    line-height: 1.7;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.button {
+    display: inline-block;
+    padding: 15px 25px;
+    border-radius: 11px;
+    text-decoration: none;
+    color: white;
+    font-weight: 900;
+    transition: .3s;
+}
+
+.primary {
+    background: linear-gradient(135deg,#7c3cff,#00aaff);
+    box-shadow: 0 0 30px rgba(124,60,255,.35);
+}
+
+.primary:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 0 45px rgba(124,60,255,.65);
+}
+
+.secondary {
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(255,255,255,.04);
+}
+
+.secondary:hover {
+    transform: translateY(-5px);
+    border-color: #7c3cff;
+}
+
+/* GENERAL */
+
+section {
+    max-width: 1150px;
+    margin: auto;
+    padding: 90px 25px;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-title small {
+    color: #8b5cf6;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.section-title h2 {
+    font-size: 40px;
+    margin-top: 10px;
+}
+
+.section-title p {
+    color: #777487;
+    margin-top: 10px;
+}
+
+/* STATS */
+
+.stats {
+    max-width: 1000px;
+    margin: -30px auto 50px;
+    padding: 0 20px;
+
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 15px;
+}
+
+.stat {
+    text-align: center;
+    padding: 25px 15px;
+
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 17px;
+
+    transition: .3s;
+}
+
+.stat:hover {
+    transform: translateY(-6px);
+    border-color: rgba(124,60,255,.5);
+}
+
+.stat h3 {
+    font-size: 30px;
+    color: #a78bfa;
+}
+
+.stat p {
+    color: #6e6a78;
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-top: 7px;
+}
+
+/* FEATURES */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 18px;
+}
+
+.card {
+    padding: 28px;
+    border-radius: 18px;
+
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,.07),
+        rgba(255,255,255,.025)
+    );
+
+    border: 1px solid rgba(255,255,255,.08);
+    transition: .35s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(124,60,255,.5);
+    box-shadow: 0 15px 45px rgba(0,0,0,.3);
+}
+
+.card-icon {
+    font-size: 35px;
+    margin-bottom: 18px;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #777487;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* EVENTS */
+
+.events {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 18px;
+}
+
+.event {
+    padding: 25px;
+    border-radius: 17px;
+
+    background: rgba(255,255,255,.035);
+    border: 1px solid rgba(255,255,255,.08);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    transition: .3s;
+}
+
+.event:hover {
+    transform: translateX(5px);
+    border-color: #7c3cff;
+}
+
+.event small {
+    color: #8b5cf6;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.event h3 {
+    margin-top: 7px;
+}
+
+.event p {
+    color: #777487;
+    font-size: 13px;
+    margin-top: 7px;
+}
+
+.event-icon {
+    font-size: 35px;
+}
+
+/* STAFF */
+
+.staff {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 16px;
+}
+
+.staff-card {
+    padding: 25px;
+    text-align: center;
+
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 18px;
+
+    transition: .3s;
+}
+
+.staff-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(124,60,255,.5);
+    box-shadow: 0 12px 35px rgba(124,60,255,.15);
+}
+
+.avatar {
+    width: 75px;
+    height: 75px;
+    margin: auto auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: linear-gradient(135deg,#7c3cff,#00aaff);
+    font-size: 30px;
+
+    box-shadow: 0 0 25px rgba(124,60,255,.3);
+}
+
+.staff-card h3 {
+    font-size: 17px;
+}
+
+.staff-card p {
+    color: #8b5cf6;
+    font-size: 12px;
+    margin-top: 7px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* RANKS */
+
+.ranks {
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    gap: 12px;
+}
+
+.rank {
+    padding: 22px 10px;
+    text-align: center;
+    border-radius: 15px;
+
+    background: rgba(255,255,255,.035);
+    border: 1px solid rgba(255,255,255,.07);
+}
+
+.rank span {
+    font-size: 28px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.rank h3 {
+    font-size: 13px;
+}
+
+.rank p {
+    color: #6f6a79;
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+/* FAQ */
+
+.faq {
+    max-width: 800px;
+    margin: auto;
+}
+
+details {
+    margin-bottom: 12px;
+    padding: 18px 20px;
+
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 13px;
+}
+
+summary {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+details p {
+    color: #777487;
+    margin-top: 13px;
+    line-height: 1.6;
+}
+
+/* DISCORD */
+
+.discord-box {
+    text-align: center;
+    padding: 70px 25px;
+
+    border-radius: 28px;
+
+    background:
+        radial-gradient(
+            circle at center top,
+            rgba(124,60,255,.25),
+            transparent 55%
+        ),
+        rgba(255,255,255,.035);
+
+    border: 1px solid rgba(124,60,255,.3);
+}
+
+.discord-box h2 {
+    font-size: 45px;
+}
+
+.discord-box p {
+    max-width: 600px;
+    margin: 15px auto 30px;
+    color: #817c90;
+    line-height: 1.7;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 35px 20px;
+    border-top: 1px solid rgba(255,255,255,.08);
+    color: #625e70;
+    font-size: 13px;
+}
+
+footer strong {
+    color: #a78bfa;
+}
+
+/* ANIMATION */
+
+@keyframes float {
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:850px) {
+
+    .nav-links a:not(.discord-nav) {
+        display: none;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .cards,
+    .events {
+        grid-template-columns: 1fr;
+    }
+
+    .staff {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .ranks {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .hero h2 {
+        letter-spacing: 3px;
+    }
+}
+
+@media(max-width:500px) {
+
+    .stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .staff {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .hero h1 {
+        letter-spacing: -3px;
+    }
+
+    .section-title h2 {
+        font-size: 31px;
+    }
+
+    .discord-box h2 {
+        font-size: 32px;
+    }
+}
+
+::selection {
+    background: transparent;
+}
+</style>
 </head>
 
 <body>
 
-    <div class="glow one"></div>
-    <div class="glow two"></div>
+<div class="orb one"></div>
+<div class="orb two"></div>
 
-    <!-- NAVBAR -->
 
-    <nav>
-        <div class="logo">
-            ZENITH<span>.</span>
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+        ZENITH<span>.</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="#features">Features</a>
+        <a href="#events">Events</a>
+        <a href="#staff">Staff</a>
+        <a href="#faq">FAQ</a>
+
+        <a href="rules.html">
+            📜 Rules
+        </a>
+
+        <a
+            href="https://discord.gg/z7wX5uJD"
+            target="_blank"
+            class="discord-nav">
+            💬 Discord
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<div class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            ⚡ WELCOME TO ZENITH
         </div>
 
-        <div class="nav-buttons">
+        <h1>ZENITH</h1>
+
+        <h2>GAMING COMMUNITY</h2>
+
+        <p>
+            Welcome to Zenith — a community made for players,
+            friends and gaming enthusiasts. Meet new people,
+            participate in events and enjoy the community.
+        </p>
+
+        <div class="buttons">
+
             <a
                 href="https://discord.gg/z7wX5uJD"
                 target="_blank"
-                class="nav-button discord-button">
-                💬 DISCORD
+                class="button primary">
+                💜 JOIN DISCORD
             </a>
 
             <a
-                href="rules.html"
-                class="nav-button">
-                📜 RULES
+                href="#features"
+                class="button secondary">
+                ⚡ EXPLORE
             </a>
-        </div>
-    </nav>
-
-
-    <!-- HERO -->
-
-    <main>
-
-        <div class="hero">
-
-            <div class="hero-content">
-
-                <div class="badge">
-                    ⚡ WELCOME TO THE ZENITH COMMUNITY
-                </div>
-
-                <h1>ZENITH</h1>
-
-                <h2>FORTNITE COMMUNITY</h2>
-
-                <p>
-                    A modern gaming community built for players who want
-                    to meet new people, play together, participate in events
-                    and enjoy a friendly gaming environment.
-                </p>
-
-                <div class="hero-buttons">
-
-                    <a
-                        href="https://discord.gg/z7wX5uJD"
-                        target="_blank"
-                        class="main-button join-button">
-                        💬 JOIN DISCORD
-                    </a>
-
-                    <a
-                        href="#features"
-                        class="main-button explore-button">
-                        ⚡ EXPLORE ZENITH
-                    </a>
-
-                </div>
-
-            </div>
 
         </div>
 
+    </div>
 
-        <!-- STATS -->
+</div>
 
-        <div class="stats">
 
-            <div class="stat">
-                <h3>24/7</h3>
-                <p>Community</p>
-            </div>
+<!-- STATS -->
 
-            <div class="stat">
-                <h3>∞</h3>
-                <p>Good Times</p>
-            </div>
+<div class="stats">
 
-            <div class="stat">
-                <h3>100%</h3>
-                <p>Fair Play</p>
-            </div>
+    <div class="stat">
+        <h3>24/7</h3>
+        <p>Community</p>
+    </div>
 
-        </div>
+    <div class="stat">
+        <h3>∞</h3>
+        <p>Possibilities</p>
+    </div>
 
+    <div class="stat">
+        <h3>100%</h3>
+        <p>Fair Play</p>
+    </div>
 
-        <!-- FEATURES -->
+    <div class="stat">
+        <h3>2026</h3>
+        <p>Founded</p>
+    </div>
 
-        <section id="features">
+</div>
 
-            <div class="section-title">
 
-                <span>WHY ZENITH?</span>
+<!-- FEATURES -->
 
-                <h2>Built For The Community</h2>
+<section id="features">
 
-                <p>
-                    Everything you need for a great gaming community.
-                </p>
+    <div class="section-title">
 
-            </div>
+        <small>WHY ZENITH?</small>
 
-
-            <div class="cards">
-
-                <div class="card">
-
-                    <div class="icon">🎮</div>
-
-                    <h3>Gaming Community</h3>
-
-                    <p>
-                        Meet other players, create squads and enjoy
-                        gaming together with the Zenith community.
-                    </p>
-
-                </div>
-
-
-                <div class="card">
-
-                    <div class="icon">🏆</div>
-
-                    <h3>Community Events</h3>
-
-                    <p>
-                        Participate in future tournaments, events
-                        and fun activities organized by the community.
-                    </p>
-
-                </div>
-
-
-                <div class="card">
-
-                    <div class="icon">🛡️</div>
-
-                    <h3>Fair Play</h3>
-
-                    <p>
-                        We want Zenith to be a friendly place where
-                        everyone can enjoy gaming without toxic behavior.
-                    </p>
-
-                </div>
-
-
-                <div class="card">
-
-                    <div class="icon">💬</div>
-
-                    <h3>Active Discord</h3>
-
-                    <p>
-                        Chat with the community, find teammates and
-                        stay up to date with everything happening in Zenith.
-                    </p>
-
-                </div>
-
-
-                <div class="card">
-
-                    <div class="icon">👑</div>
-
-                    <h3>Friendly Staff</h3>
-
-                    <p>
-                        Our staff team helps keep the server organized,
-                        welcoming and enjoyable for everyone.
-                    </p>
-
-                </div>
-
-
-                <div class="card">
-
-                    <div class="icon">⚡</div>
-
-                    <h3>Always Growing</h3>
-
-                    <p>
-                        Zenith is built to grow with its community.
-                        New features and events can be added over time.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- EVENTS -->
-
-        <section>
-
-            <div class="section-title">
-
-                <span>COMING SOON</span>
-
-                <h2>Featured Events</h2>
-
-                <p>
-                    More community activities are coming to Zenith.
-                </p>
-
-            </div>
-
-
-            <div class="events">
-
-                <div class="event">
-
-                    <div>
-                        <div class="event-label">COMMUNITY</div>
-
-                        <h3>🎮 Gaming Nights</h3>
-
-                        <p>
-                            Play together with members of Zenith.
-                        </p>
-                    </div>
-
-                    <div class="event-icon">
-                        🎮
-                    </div>
-
-                </div>
-
-
-                <div class="event">
-
-                    <div>
-                        <div class="event-label">EVENT</div>
-
-                        <h3>🏆 Community Challenges</h3>
-
-                        <p>
-                            Fun challenges for the community.
-                        </p>
-                    </div>
-
-                    <div class="event-icon">
-                        🏆
-                    </div>
-
-                </div>
-
-
-                <div class="event">
-
-                    <div>
-                        <div class="event-label">COMING SOON</div>
-
-                        <h3>⚡ Special Events</h3>
-
-                        <p>
-                            New events will be announced on Discord.
-                        </p>
-                    </div>
-
-                    <div class="event-icon">
-                        ⚡
-                    </div>
-
-                </div>
-
-
-                <div class="event">
-
-                    <div>
-                        <div class="event-label">ZENITH</div>
-
-                        <h3>👑 Community Activities</h3>
-
-                        <p>
-                            More activities are coming soon.
-                        </p>
-                    </div>
-
-                    <div class="event-icon">
-                        👑
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- DISCORD -->
-
-        <section class="discord-section">
-
-            <div class="discord-box">
-
-                <h2>READY TO JOIN?</h2>
-
-                <p>
-                    Join the Zenith Discord and become part of the community.
-                    Meet new players, find teammates and stay updated.
-                </p>
-
-                <a
-                    href="https://discord.gg/z7wX5uJD"
-                    target="_blank"
-                    class="main-button join-button">
-                    💜 JOIN ZENITH DISCORD
-                </a>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- FOOTER -->
-
-    <footer>
+        <h2>Built For The Community</h2>
 
         <p>
-            © 2026 <strong>ZENITH</strong> — Gaming Community
+            Everything you need to enjoy the Zenith experience.
         </p>
 
-        <p style="margin-top: 8px;">
-            Built for the community 💜
+    </div>
+
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="card-icon">🎮</div>
+            <h3>Gaming Community</h3>
+            <p>
+                Find teammates, make friends and enjoy gaming
+                with other members.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🏆</div>
+            <h3>Community Events</h3>
+            <p>
+                Join challenges, tournaments and special
+                community activities.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🛡️</div>
+            <h3>Fair Play</h3>
+            <p>
+                We want Zenith to remain friendly, organized
+                and enjoyable for everyone.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">💬</div>
+            <h3>Active Discord</h3>
+            <p>
+                Chat, play and stay connected with the Zenith
+                community.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">⚡</div>
+            <h3>Growing Community</h3>
+            <p>
+                Zenith is constantly evolving with new ideas,
+                events and features.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">👑</div>
+            <h3>Friendly Staff</h3>
+            <p>
+                Our staff team helps keep the community organized
+                and welcoming.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- EVENTS -->
+
+<section id="events">
+
+    <div class="section-title">
+
+        <small>COMMUNITY</small>
+
+        <h2>Upcoming Events</h2>
+
+        <p>
+            More Zenith activities are coming soon.
         </p>
 
-    </footer>
+    </div>
 
 
-    <!-- COPY PROTECTION -->
+    <div class="events">
 
-    <script>
+        <div class="event">
 
-        document.addEventListener("contextmenu", function(event) {
-            event.preventDefault();
-        });
+            <div>
+                <small>COMMUNITY</small>
+                <h3>🎮 Gaming Night</h3>
+                <p>
+                    Play together with Zenith members.
+                </p>
+            </div>
 
-        document.addEventListener("copy", function(event) {
-            event.preventDefault();
-        });
+            <div class="event-icon">
+                🎮
+            </div>
 
-        document.addEventListener("cut", function(event) {
-            event.preventDefault();
-        });
+        </div>
 
-        document.addEventListener("dragstart", function(event) {
-            event.preventDefault();
-        });
 
-        document.addEventListener("selectstart", function(event) {
-            event.preventDefault();
-        });
+        <div class="event">
 
-    </script>
+            <div>
+                <small>EVENT</small>
+                <h3>🏆 Community Challenge</h3>
+                <p>
+                    Test your skills and have fun.
+                </p>
+            </div>
+
+            <div class="event-icon">
+                🏆
+            </div>
+
+        </div>
+
+
+        <div class="event">
+
+            <div>
+                <small>COMING SOON</small>
+                <h3>⚡ Special Event</h3>
+                <p>
+                    Announcements will be posted on Discord.
+                </p>
+            </div>
+
+            <div class="event-icon">
+                ⚡
+            </div>
+
+        </div>
+
+
+        <div class="event">
+
+            <div>
+                <small>ZENITH</small>
+                <h3>👑 Community Day</h3>
+                <p>
+                    A special day for the Zenith community.
+                </p>
+            </div>
+
+            <div class="event-icon">
+                👑
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STAFF -->
+
+<section id="staff">
+
+    <div class="section-title">
+
+        <small>THE TEAM</small>
+
+        <h2>Zenith Staff</h2>
+
+        <p>
+            Meet the people helping manage the community.
+        </p>
+
+    </div>
+
+
+    <div class="staff">
+
+        <!-- FOUNDER -->
+
+        <div class="staff-card">
+
+            <div class="avatar">👑</div>
+
+            <h3>ZENITH</h3>
+
+            <p>FOUNDER</p>
+
+        </div>
+
+
+        <!-- ADMIN -->
+
+        <div class="staff-card">
+
+            <div class="avatar">🛡️</div>
+
+            <h3>W SECRET LOKII</h3>
+
+            <p>ADMIN</p>
+
+        </div>
+
+
+        <!-- MODERATOR -->
+
+        <div class="staff-card">
+
+            <div class="avatar">🔨</div>
+
+            <h3>STAFF</h3>
+
+            <p>MODERATOR</p>
+
+        </div>
+
+
+        <!-- HELPER -->
+
+        <div class="staff-card">
+
+            <div class="avatar">💜</div>
+
+            <h3>STAFF</h3>
+
+            <p>HELPER</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- RANKS -->
+
+<section>
+
+    <div class="section-title">
+
+        <small>PROGRESSION</small>
+
+        <h2>Zenith Ranks</h2>
+
+        <p>
+            Grow with the community.
+        </p>
+
+    </div>
+
+
+    <div class="ranks">
+
+        <div class="rank">
+            <span>👤</span>
+            <h3>Member</h3>
+            <p>New member</p>
+        </div>
+
+        <div class="rank">
+            <span>⭐</span>
+            <h3>Active</h3>
+            <p>Active member</p>
+        </div>
+
+        <div class="rank">
+            <span>🔥</span>
+            <h3>Veteran</h3>
+            <p>Experienced</p>
+        </div>
+
+        <div class="rank">
+            <span>💎</span>
+            <h3>Elite</h3>
+            <p>Trusted member</p>
+        </div>
+
+        <div class="rank">
+            <span>👑</span>
+            <h3>Legend</h3>
+            <p>Zenith legend</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FAQ -->
+
+<section id="faq">
+
+    <div class="section-title">
+
+        <small>HELP CENTER</small>
+
+        <h2>Frequently Asked Questions</h2>
+
+        <p>
+            Quick answers about Zenith.
+        </p>
+
+    </div>
+
+
+    <div class="faq">
+
+        <details>
+
+            <summary>
+                How do I join Zenith?
+            </summary>
+
+            <p>
+                Click any Join Discord button on the website
+                and join our Discord community.
+            </p>
+
+        </details>
+
+
+        <details>
+
+            <summary>
+                Where can I find the rules?
+            </summary>
+
+            <p>
+                Click the Rules button in the navigation bar.
+            </p>
+
+        </details>
+
+
+        <details>
+
+            <summary>
+                Are there community events?
+            </summary>
+
+            <p>
+                Yes. Future events and activities will be
+                announced on the Discord server.
+            </p>
+
+        </details>
+
+
+        <details>
+
+            <summary>
+                How can I contact staff?
+            </summary>
+
+            <p>
+                Join the Discord server and use the appropriate
+                support or staff channels.
+            </p>
+
+        </details>
+
+    </div>
+
+</section>
+
+
+<!-- DISCORD CTA -->
+
+<section>
+
+    <div class="discord-box">
+
+        <h2>READY TO JOIN ZENITH?</h2>
+
+        <p>
+            Join the Discord community, meet new people,
+            find teammates and stay updated with everything
+            happening in Zenith.
+        </p>
+
+        <a
+            href="https://discord.gg/z7wX5uJD"
+            target="_blank"
+            class="button primary">
+            💬 JOIN ZENITH DISCORD
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        © 2026 <strong>ZENITH</strong> — Gaming Community
+    </p>
+
+    <p style="margin-top:8px;">
+        Built for the community 💜
+    </p>
+
+</footer>
+
+
+<!-- COPY PROTECTION -->
+
+<script>
+
+document.addEventListener("contextmenu", function(event) {
+    event.preventDefault();
+});
+
+document.addEventListener("copy", function(event) {
+    event.preventDefault();
+});
+
+document.addEventListener("cut", function(event) {
+    event.preventDefault();
+});
+
+document.addEventListener("dragstart", function(event) {
+    event.preventDefault();
+});
+
+document.addEventListener("selectstart", function(event) {
+    event.preventDefault();
+});
+
+</script>
 
 </body>
 </html>
